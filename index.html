@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Siyah Süsen — Elder’in İntikamı</title>
+  <style>
+    :root { --ink:#08070b; --bone:#e9e1c7; --gold:#c7a76d; --susen:#9a87cc; }
+    * { box-sizing:border-box; }
+    html,body { height:100%; }
+    body { margin:0; overflow:hidden; background:var(--ink); color:var(--bone); font-family:Georgia,"Times New Roman",serif; }
+    .scene { position:relative; height:100%; isolation:isolate; background:linear-gradient(180deg,#17131e 0%,#09080c 58%,#020204 100%); }
+    .mist { position:absolute; inset:0; opacity:.5; background:radial-gradient(ellipse at 20% 80%,#43364f 0 2%,transparent 12%),radial-gradient(ellipse at 70% 70%,#30283a 0 3%,transparent 15%),linear-gradient(115deg,transparent 30%,rgba(232,218,194,.06) 45%,transparent 60%); filter:blur(3px); animation:drift 14s ease-in-out infinite alternate; }
+    .moon { position:absolute; width:min(24vw,260px); aspect-ratio:1; border-radius:50%; left:68%; top:11%; background:#d9d3bd; box-shadow:0 0 50px rgba(217,211,189,.22); opacity:.78; }
+    .moon:after { content:""; position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 70% 28%,transparent 0 8%,rgba(60,55,69,.18) 9% 12%,transparent 13%),radial-gradient(circle at 28% 65%,rgba(60,55,69,.12),transparent 16%); }
+    .castle { position:absolute; left:50%; bottom:17%; width:min(72vw,900px); height:45%; transform:translateX(-50%); opacity:.9; filter:drop-shadow(0 20px 25px #000); }
+    .castle:before { content:""; position:absolute; left:0; right:0; bottom:0; height:55%; background:linear-gradient(160deg,#09090e 0 55%,#15131b 56% 58%,#08080b 59%); clip-path:polygon(0 100%,0 54%,8% 54%,8% 35%,11% 35%,11% 54%,18% 54%,18% 23%,21% 23%,21% 54%,32% 54%,32% 43%,35% 43%,35% 54%,44% 54%,44% 13%,49% 13%,49% 54%,61% 54%,61% 27%,65% 27%,65% 54%,74% 54%,74% 38%,77% 38%,77% 54%,88% 54%,88% 18%,91% 18%,91% 54%,100% 54%,100% 100%); }
+    .castle:after { content:""; position:absolute; left:44%; bottom:39%; width:12%; height:35%; background:#060608; clip-path:polygon(50% 0,100% 100%,0 100%); border-radius:50% 50% 0 0; }
+    .ground { position:absolute; left:-10%; right:-10%; bottom:-12%; height:32%; border-radius:50% 50% 0 0; background:linear-gradient(175deg,#15141a,#050507 70%); transform:rotate(-1deg); }
+    .elder { position:absolute; z-index:3; left:50%; bottom:12%; width:8px; height:150px; background:#08070a; transform:translateX(-50%); filter:drop-shadow(0 0 8px #000); }
+    .elder:before { content:""; position:absolute; width:44px; height:52px; border-radius:48% 48% 35% 35%; left:-18px; top:-43px; background:#08070a; clip-path:polygon(40% 0,60% 0,100% 100%,0 100%); }
+    .elder:after { content:""; position:absolute; width:32px; height:210px; left:-12px; top:-35px; background:#08070a; clip-path:polygon(42% 0,58% 0,70% 65%,100% 100%,0 100%,30% 65%); }
+    .cloak { position:absolute; z-index:4; left:calc(50% - 80px); bottom:11%; width:160px; height:8px; border-radius:50%; background:#020203; filter:blur(2px); }
+    .ring { position:absolute; z-index:7; left:calc(50% + 15px); bottom:140px; width:12px; height:12px; border:2px solid #9e8c63; border-radius:50%; box-shadow:0 0 12px #d6c0ff,0 0 30px #7961a6; animation:pulse 2.4s ease-in-out infinite; }
+    .flower { position:absolute; left:-13px; top:-34px; width:36px; height:36px; opacity:0; transform:scale(.2) rotate(-20deg); animation:flower 2.4s 1s ease-in-out infinite; }
+    .flower i { position:absolute; left:14px; top:8px; width:9px; height:18px; background:#5b4a88; border-radius:70% 70% 30% 30%; box-shadow:0 0 8px #9e89d2; transform-origin:50% 100%; }
+    .flower i:nth-child(2){ transform:rotate(72deg); }.flower i:nth-child(3){ transform:rotate(144deg); }.flower i:nth-child(4){ transform:rotate(216deg); }.flower i:nth-child(5){ transform:rotate(288deg); }
+    .title { position:absolute; z-index:10; left:7%; top:9%; width:48%; animation:reveal 2s .4s both; }
+    .eyebrow { color:var(--gold); letter-spacing:.48em; text-transform:uppercase; font-size:clamp(9px,1.2vw,14px); }
+    h1 { margin:.25em 0 .18em; font-size:clamp(44px,8vw,112px); line-height:.82; font-weight:400; letter-spacing:-.055em; text-transform:uppercase; text-shadow:0 5px 30px #000; }
+    .subtitle { max-width:580px; color:#bdb5a4; font-size:clamp(14px,1.7vw,22px); line-height:1.5; font-style:italic; }
+    .mark { position:absolute; z-index:11; right:5%; bottom:5%; text-align:right; color:#867b68; font-size:11px; letter-spacing:.3em; text-transform:uppercase; }
+    .mark strong { display:block; margin-top:7px; color:var(--gold); font-size:clamp(18px,2vw,28px); letter-spacing:.12em; }
+    .grain { position:absolute; z-index:20; inset:-50%; pointer-events:none; opacity:.12; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E"); animation:grain .18s steps(2) infinite; }
+    @keyframes drift { to { transform:translate3d(4%,2%,0) scale(1.07); } }
+    @keyframes pulse { 50% { box-shadow:0 0 18px #d6c0ff,0 0 55px #7961a6; } }
+    @keyframes flower { 0%,100%{opacity:0;transform:scale(.2) rotate(-20deg)} 35%,75%{opacity:.95;transform:scale(1) rotate(0)} }
+    @keyframes reveal { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+    @keyframes grain { 0%{transform:translate(0,0)} 50%{transform:translate(3%,-2%) } 100%{transform:translate(-2%,3%)} }
+    @media(max-width:700px){ .title{width:86%;top:7%;}.moon{left:58%;top:27%;}.castle{width:110vw;bottom:23%;}.elder{bottom:14%;}.cloak{bottom:13%;}.ring{bottom:145px}.subtitle{max-width:300px}.mark{display:none} }
+  </style>
+</head>
+<body>
+  <main class="scene" aria-label="Siyah Süsen hikayesinin açılış sahnesi">
+    <div class="mist"></div><div class="moon"></div>
+    <div class="castle"></div><div class="ground"></div>
+    <div class="title">
+      <div class="eyebrow">Elrimut’un son soyundan</div>
+      <h1>Siyah<br>Süsen</h1>
+      <p class="subtitle">Bir yüzük. Bir isim. Yıllar önce alınan bir intikamın son hatırlatıcısı.</p>
+    </div>
+    <div class="elder"></div><div class="cloak"></div>
+    <div class="ring"><div class="flower"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="mark">Katrevan İmparatorluğu<strong>Elder</strong></div>
+    <div class="grain"></div>
+  </main>
+</body>
+</html>
